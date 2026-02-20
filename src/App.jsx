@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Menu, X, Github, Linkedin, Instagram, Mail, 
-  ExternalLink, FileText, ArrowRight, 
-  Code2, Server, Database, Globe, Cpu, Terminal, Layout, Box, Smartphone, Layers
+import {
+  Menu, X, Github, Linkedin, Instagram, Mail,
+  ExternalLink, FileText, ArrowRight,
+  Code2, Server, Database, Globe, Cpu, Terminal, Layout, Box, Smartphone, Layers, Sparkles, Bot
 } from 'lucide-react';
+import profileImage from './assets/my_photo.jpg';
 
 const Portfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -55,7 +56,7 @@ const Portfolio = () => {
   );
 
   // 스킬 뱃지 컴포넌트 (반응형 개선)
-  const SkillBadge = ({ icon: Icon, name, colorClass, level }) => {
+  const SkillBadge = ({ icon: Icon, name, colorClass, level, subtitle }) => {
     // 레벨에 따른 게이지 너비와 스타일 설정
     const getLevelInfo = (lvl) => {
       switch (lvl) {
@@ -65,9 +66,9 @@ const Portfolio = () => {
         default: return { width: '0%', textClass: 'text-slate-300' };
       }
     };
-    
+
     const { width, textClass } = getLevelInfo(level);
-    const progressColor = colorClass.replace('bg-', 'bg-'); 
+    const progressColor = colorClass.replace('bg-', 'bg-');
 
     return (
       <div className="flex flex-col p-3 sm:p-4 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md hover:border-indigo-300 transition-all duration-300 group w-full">
@@ -76,17 +77,20 @@ const Portfolio = () => {
             <div className={`p-1.5 sm:p-2 rounded-lg ${colorClass} bg-opacity-10 mr-2 sm:mr-3 flex-shrink-0 group-hover:scale-110 transition-transform`}>
               <Icon size={18} className={`${colorClass.replace('bg-', 'text-')} sm:w-5 sm:h-5`} />
             </div>
-            <span className="font-semibold text-slate-700 text-xs sm:text-sm truncate">{name}</span> {/* truncate로 긴 텍스트 말줄임 */}
+            <div className="flex flex-col min-w-0 flex-1">
+              <span className="font-semibold text-slate-700 text-xs sm:text-sm">{name}</span>
+              {subtitle && <span className="text-[10px] text-slate-400 mt-0.5 leading-tight">{subtitle}</span>}
+            </div>
           </div>
           <span className={`flex-shrink-0 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wide border ${textClass}`}>
             {level}
           </span>
         </div>
-        
+
         {/* Progress Bar */}
         <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
-          <div 
-            className={`h-full rounded-full ${progressColor} opacity-80 transition-all duration-1000 ease-out`} 
+          <div
+            className={`h-full rounded-full ${progressColor} opacity-80 transition-all duration-1000 ease-out`}
             style={{ width: width }}
           ></div>
         </div>
@@ -103,7 +107,7 @@ const Portfolio = () => {
           <div className="flex justify-between h-16 items-center">
             <div className="flex-shrink-0 cursor-pointer" onClick={() => scrollToSection('home')}>
               <span className="text-xl font-bold font-mono text-slate-900 hover:text-indigo-600 transition-colors">
-                &lt;DevPort /&gt;
+                &lt;Han's PortFolio /&gt;
               </span>
             </div>
             
@@ -147,13 +151,13 @@ const Portfolio = () => {
             Available for work
           </div>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
-            문제를 해결하는<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">웹 개발자</span> 홍길동입니다.
-          </h1>
+          <h3 className="text-2xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
+            실패를 두려워 하지 않고 시도하는<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">웹 개발자</span> 한성민입니다.
+          </h3>
           
-          <p className="mt-4 max-w-2xl mx-auto text-xl text-slate-500 mb-10 leading-relaxed">
-            사용자 경험을 최우선으로 생각하며, 유지보수가 가능한 깔끔한 코드를 작성합니다.<br className="hidden md:block"/>
+          <p className="mt-4 max-w-4xl mx-auto text-xl text-slate-500 mb-10 leading-relaxed">
+            사용자 경험을 최우선으로 생각하며, 유지보수가 가능하고 클린코드를 지향합니다.<br className="hidden md:block"/>
             새로운 기술을 배우고 적용하는 것을 즐깁니다.
           </p>
           
@@ -177,38 +181,43 @@ const Portfolio = () => {
       {/* 2. About Section (Updated Tech Stack with Levels & Mobile Fix) */}
       <section id="about" className="py-24 bg-white relative">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            
-            {/* Left: Profile & Bio */}
-            <div>
+          <div className="flex flex-col gap-16">
+
+            {/* Top: Profile & Bio */}
+            <div className="grid lg:grid-cols-2 gap-16 items-start">
+              <div>
                <div className="relative group w-fit mx-auto lg:mx-0 mb-10">
                   <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-                  <div className="relative bg-white border border-slate-200 rounded-2xl w-64 h-64 md:w-80 md:h-80 overflow-hidden shadow-sm flex items-center justify-center">
-                    <div className="text-center text-slate-400">
-                      <FileText className="w-16 h-16 mx-auto mb-4" />
-                      <span>Profile Image</span>
-                    </div>
+                  <div className="relative bg-white border border-slate-200 rounded-2xl w-64 h-64 md:w-80 md:h-80 overflow-hidden shadow-sm">
+                    <img
+                      src={profileImage}
+                      alt="한성민 프로필"
+                      className="w-full h-full object-contain"
+                    />
                   </div>
               </div>
+              </div>
 
+              <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-6 flex items-center">
                 <span className="text-indigo-600 mr-2">01.</span> About Me
               </h2>
               <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-                안녕하세요! 웹 기술로 세상에 가치를 더하고 싶은 <strong>3년차 프론트엔드 개발자</strong>입니다. 
+                안녕하세요! 웹 기술로 세상에 가치를 더하고 싶은 <strong>5년차 풀스택 개발자</strong>입니다.
                 단순히 기능이 동작하는 것을 넘어, 사용자가 "편하다"고 느끼는 UI/UX를 고민합니다.
               </p>
               <p className="text-slate-500 mb-8 leading-relaxed">
-                JavaScript 생태계에 깊은 관심을 가지고 있으며, 최근에는 React와 TypeScript를 주력으로 사용하고 있습니다. 
+                JavaScript 생태계에 깊은 관심을 가지고 있으며, 최근에는 React와 TypeScript를 주력으로 사용하고 있습니다.
                 팀원과의 원활한 소통을 중요시하며, 코드 리뷰 문화를 사랑합니다.
               </p>
-              
+
               <a href="#" className="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold transition-colors border-b-2 border-transparent hover:border-indigo-600 pb-1">
                 <FileText className="w-5 h-5 mr-2" /> 이력서 다운로드
               </a>
+              </div>
             </div>
 
-            {/* Right: Tech Stack Grid */}
+            {/* Bottom: Tech Stack Grid */}
             <div className="bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-100 shadow-inner">
                <h3 className="text-xl font-bold text-slate-900 mb-8 flex items-center">
                   <span className="bg-indigo-100 p-2 rounded-lg mr-3">
@@ -218,27 +227,72 @@ const Portfolio = () => {
                </h3>
 
                <div className="space-y-8">
-                  {/* Category: Frontend */}
-                  <div>
-                    <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 pl-1">Frontend</h4>
-                    {/* 모바일에서는 1열(grid-cols-1), 작은 태블릿부터 2열(sm:grid-cols-2)로 변경 */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <SkillBadge icon={Code2} name="React.js" colorClass="bg-blue-500" level="Top" />
-                      <SkillBadge icon={Layout} name="Next.js" colorClass="bg-slate-800" level="Middle" />
-                      <SkillBadge icon={Box} name="TypeScript" colorClass="bg-blue-600" level="Middle" />
-                      <SkillBadge icon={Globe} name="Tailwind" colorClass="bg-teal-500" level="Top" />
-                      <SkillBadge icon={Smartphone} name="React Native" colorClass="bg-cyan-500" level="Low" />
+                  {/* Category: Backend & AI (핵심 강조 구역) */}
+                  <div className="border-2 border-indigo-200 rounded-xl p-4 bg-indigo-50/30">
+                    <h4 className="text-sm font-bold text-indigo-700 uppercase tracking-wider mb-4 pl-1 flex items-center">
+                      <span className="mr-2">⭐</span> Backend & AI (Core)
+                    </h4>
+
+                    {/* BACKEND */}
+                    <div className="mb-4">
+                      <p className="text-xs text-slate-500 font-semibold mb-2 pl-1">BACKEND</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <SkillBadge icon={Code2} name="PHP" subtitle="Laravel, CodeIgniter" colorClass="bg-purple-600" level="Top" />
+                        <SkillBadge icon={Server} name="Django" subtitle="Python Framework" colorClass="bg-green-700" level="Middle" />
+                        <SkillBadge icon={Database} name="MySQL" colorClass="bg-blue-600" level="Top" />
+                      </div>
+                    </div>
+
+                    {/* AI & DATA */}
+                    <div className="mb-4">
+                      <p className="text-xs text-slate-500 font-semibold mb-2 pl-1">AI & DATA</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <SkillBadge icon={Bot} name="Ollama (Local LLM)" colorClass="bg-purple-500" level="Top" />
+                        <SkillBadge icon={Database} name="RAG" colorClass="bg-teal-600" level="Middle" />
+                        <SkillBadge icon={Layout} name="PaddleOCR" colorClass="bg-green-600" level="Middle" />
+                        <SkillBadge icon={Terminal} name="AI Agents" colorClass="bg-violet-600" level="Top" />
+                      </div>
+                    </div>
+
+                    {/* INFRA */}
+                    <div>
+                      <p className="text-xs text-slate-500 font-semibold mb-2 pl-1">INFRA</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <SkillBadge icon={Server} name="AWS (EC2)" colorClass="bg-orange-500" level="Middle" />
+                        <SkillBadge icon={Globe} name="Nginx" colorClass="bg-green-700" level="Middle" />
+                      </div>
                     </div>
                   </div>
 
-                  {/* Category: Backend & Tools */}
+                  {/* Category: Frontend & Mobile (확장성 구역) */}
                   <div>
-                    <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 pl-1">Backend & Tools</h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <SkillBadge icon={Server} name="Node.js" colorClass="bg-green-600" level="Middle" />
-                      <SkillBadge icon={Database} name="Firebase" colorClass="bg-yellow-500" level="Middle" />
-                      <SkillBadge icon={Terminal} name="Git" colorClass="bg-orange-600" level="Top" />
-                      <SkillBadge icon={Cpu} name="AWS" colorClass="bg-orange-500" level="Low" />
+                    <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4 pl-1">Frontend & Mobile</h4>
+
+                    {/* WEB */}
+                    <div className="mb-4">
+                      <p className="text-xs text-slate-500 font-semibold mb-2 pl-1">WEB</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <SkillBadge icon={Code2} name="JavaScript" colorClass="bg-yellow-500" level="Top" />
+                        <SkillBadge icon={Layout} name="jQuery / Ajax" colorClass="bg-blue-500" level="Top" />
+                        <SkillBadge icon={Box} name="HTML5/CSS3" colorClass="bg-orange-600" level="Top" />
+                      </div>
+                    </div>
+
+                    {/* MOBILE */}
+                    <div className="mb-4">
+                      <p className="text-xs text-slate-500 font-semibold mb-2 pl-1">MOBILE</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <SkillBadge icon={Smartphone} name="Flutter" colorClass="bg-cyan-500" level="Middle" />
+                      </div>
+                    </div>
+
+                    {/* TOOLS */}
+                    <div>
+                      <p className="text-xs text-slate-500 font-semibold mb-2 pl-1">TOOLS</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <SkillBadge icon={Terminal} name="Git" colorClass="bg-orange-600" level="Top" />
+                        <SkillBadge icon={Box} name="Docker" colorClass="bg-blue-700" level="Middle" />
+                      </div>
                     </div>
                   </div>
                </div>
@@ -258,9 +312,9 @@ const Portfolio = () => {
           <div className="relative border-l-2 border-slate-200 ml-3 md:ml-6 space-y-12">
             {[
               {
-                period: "2023.01 - 현재",
-                role: "프론트엔드 개발자",
-                company: "ABC 스타트업",
+                period: "2024.06 - 현재",
+                role: "PHP & AI 개발자",
+                company: "(주)유이즈소프트",
                 desc: [
                   "사내 어드민 대시보드 UI/UX 전면 개편 (React, MUI 도입)",
                   "Lighthouse 성능 최적화를 통해 초기 로딩 속도 2.5초 -> 1.2초 단축",
@@ -269,9 +323,9 @@ const Portfolio = () => {
                 stack: ["React", "TypeScript", "Redux"]
               },
               {
-                period: "2021.06 - 2022.12",
-                role: "웹 퍼블리셔",
-                company: "XYZ 에이전시",
+                period: "2021.07 - 2024.06",
+                role: "PHP 개발자",
+                company: "(주)이즈소프트 - 대학플랫폼사업부",
                 desc: [
                   "다양한 기업의 반응형 웹사이트 10여 개 제작 및 유지보수",
                   "웹 접근성(Web Accessibility) 지침 준수 마크업 진행",
@@ -316,9 +370,9 @@ const Portfolio = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                title: "나만의 영화 기록장",
-                desc: "TMDB API를 활용하여 영화를 검색하고 평점을 기록할 수 있는 웹 애플리케이션입니다. 무한 스크롤 기능과 반응형 디자인을 지원합니다.",
-                tags: ["React", "Redux", "Styled-Comp"],
+                title: "HealingHi",
+                desc: "Flutter를 이용한 명언 앱입니다. 매일 새로운 명언과 함께 힐링을 선사합니다. 기획서를 기반으로 바이브 코딩으로 진행한 프로젝트입니다.",
+                tags: ["Flutter", "SupaBase", "AI"],
                 icon: <Layout className="w-10 h-10 text-slate-400" />
               },
               {
