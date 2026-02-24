@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Menu, X, Github, Linkedin, Instagram, Mail,
   ExternalLink, FileText, ArrowRight,
-  Code2, Server, Database, Globe, Cpu, Terminal, Layout, Box, Smartphone, Layers, Sparkles, Bot
+  Code2, Server, Database, Globe, Terminal, Layout, Box, Smartphone, Layers, Bot
 } from 'lucide-react';
 import profileImage from './assets/my_photo.jpg';
+import welcomePhoto from './assets/welcom_photo.png';
 
 const Portfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [isAtBottom, setIsAtBottom] = useState(false);
 
   // 스크롤 감지 및 섹션 활성화
   useEffect(() => {
@@ -26,6 +28,9 @@ const Portfolio = () => {
           }
         }
       });
+
+      const scrolledToBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 10;
+      setIsAtBottom(scrolledToBottom);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -101,6 +106,18 @@ const Portfolio = () => {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans selection:bg-indigo-100 selection:text-indigo-700">
       
+      {/* Scroll Down Arrow */}
+      {!isAtBottom && (
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center animate-bounce">
+          <span className="text-xs text-slate-400 mb-1 tracking-widest uppercase">Scroll</span>
+          <div className="w-8 h-8 rounded-full border-2 border-slate-300 flex items-center justify-center bg-white/70 backdrop-blur-sm shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      )}
+
       {/* Navigation */}
       <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -146,10 +163,21 @@ const Portfolio = () => {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-indigo-100/50 rounded-full blur-[120px] -z-10"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-          <div className="inline-flex items-center px-3 py-1 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-700 text-sm font-medium mb-8 animate-fade-in-up">
+          {/* Avatar */}
+          <div className="flex justify-center mb-6">
+            <div>
+              <img
+                src={welcomePhoto}
+                alt="한성민 아바타"
+                className="max-w-xs w-full h-auto"
+              />
+            </div>
+          </div>
+
+          {/* <div className="inline-flex items-center px-3 py-1 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-700 text-sm font-medium mb-8 animate-fade-in-up">
             <span className="flex w-2 h-2 bg-indigo-600 rounded-full mr-2 animate-pulse"></span>
             Available for work
-          </div>
+          </div> */}
           
           <h3 className="text-2xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
             실패를 두려워 하지 않고 시도하는<br />
@@ -203,16 +231,32 @@ const Portfolio = () => {
                 <span className="text-indigo-600 mr-2">01.</span> About Me
               </h2>
               <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-                안녕하세요! 웹 기술로 세상에 가치를 더하고 싶은 <strong>5년차 풀스택 개발자</strong>입니다.
-                단순히 기능이 동작하는 것을 넘어, 사용자가 "편하다"고 느끼는 UI/UX를 고민합니다.
+                비즈니스 로직 최적화와 AI 도입으로 운영 효율을 극대화하는 <strong>5년 차 풀스택 개발자</strong>입니다.
+                단순히 동작하는 코드를 넘어, <strong>측정 가능한 성과</strong>를 만드는 개발을 지향합니다.
               </p>
-              <p className="text-slate-500 mb-8 leading-relaxed">
-                JavaScript 생태계에 깊은 관심을 가지고 있으며, 최근에는 React와 TypeScript를 주력으로 사용하고 있습니다.
-                팀원과의 원활한 소통을 중요시하며, 코드 리뷰 문화를 사랑합니다.
-              </p>
+              <div className="space-y-3 mb-8">
+                <div className="flex items-start gap-3">
+                  <span className="mt-1 flex-shrink-0 w-2 h-2 rounded-full bg-indigo-500"></span>
+                  <p className="text-slate-500 text-sm leading-relaxed">
+                    <strong className="text-slate-700">PHP Framework Mastery</strong> — CodeIgniter · Laravel을 활용해 입시·채용 전형 핵심 솔루션 7종을 설계·운영했습니다.
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="mt-1 flex-shrink-0 w-2 h-2 rounded-full bg-indigo-500"></span>
+                  <p className="text-slate-500 text-sm leading-relaxed">
+                    <strong className="text-slate-700">Performance Engineering</strong> — MySQL 인덱스 최적화로 집중 트래픽 환경에서 응답 시간 2초 이내 안정화, 인프라 비용 15% 절감을 이끌었습니다.
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="mt-1 flex-shrink-0 w-2 h-2 rounded-full bg-indigo-500"></span>
+                  <p className="text-slate-500 text-sm leading-relaxed">
+                    <strong className="text-slate-700">AI-Augmented Engineering</strong> — Ollama 기반 로컬 LLM 구축, AI Agent(Claude Code · Cursor) 워크플로우 통합으로 개발 생산성 1.5배 향상을 달성했습니다.
+                  </p>
+                </div>
+              </div>
 
               <a href="#" className="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-semibold transition-colors border-b-2 border-transparent hover:border-indigo-600 pb-1">
-                <FileText className="w-5 h-5 mr-2" /> 이력서 다운로드
+                {/* <FileText className="w-5 h-5 mr-2" /> 이력서 다운로드 */}
               </a>
               </div>
             </div>
@@ -239,7 +283,6 @@ const Portfolio = () => {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <SkillBadge icon={Code2} name="PHP" subtitle="Laravel, CodeIgniter" colorClass="bg-purple-600" level="Top" />
                         <SkillBadge icon={Server} name="Django" subtitle="Python Framework" colorClass="bg-green-700" level="Middle" />
-                        <SkillBadge icon={Database} name="MySQL" colorClass="bg-blue-600" level="Top" />
                       </div>
                     </div>
 
@@ -251,6 +294,7 @@ const Portfolio = () => {
                         <SkillBadge icon={Database} name="RAG" colorClass="bg-teal-600" level="Middle" />
                         <SkillBadge icon={Layout} name="PaddleOCR" colorClass="bg-green-600" level="Middle" />
                         <SkillBadge icon={Terminal} name="AI Agents" colorClass="bg-violet-600" level="Top" />
+                        <SkillBadge icon={Database} name="MySQL" colorClass="bg-blue-600" level="Top" />
                       </div>
                     </div>
 
@@ -313,39 +357,83 @@ const Portfolio = () => {
             {[
               {
                 period: "2024.06 - 현재",
-                role: "PHP & AI 개발자",
+                role: "PHP & AI 개발자 (서브 리더)",
                 company: "(주)유이즈소프트",
-                desc: [
-                  "사내 어드민 대시보드 UI/UX 전면 개편 (React, MUI 도입)",
-                  "Lighthouse 성능 최적화를 통해 초기 로딩 속도 2.5초 -> 1.2초 단축",
-                  "공통 컴포넌트 라이브러리 구축 및 문서화"
+                subRole: "주요 역할: 개발팀 서브 리더 및 AI 기술 도입 총괄 (시스템 고도화, AI 파이프라인 설계, DB 최적화)",
+                sections: [
+                  {
+                    title: "AI Engineering & Modernization",
+                    items: [
+                      "Ollama 기반 로컬 LLM 환경 구축, 입시 비정형 데이터 가공 로직 개발",
+                      "Claude Code, Cursor 등 AI Agent 워크플로우 통합으로 복잡한 로직 구현 및 리팩토링 생산성 1.5배 향상",
+                      "AI를 활용한 단위 테스트 자동 생성으로 배포 후 결함 발생률 10% 감소",
+                      "멀티 모델(Claude, Gemini, GPT) 최적화 활용 및 프롬프트 엔지니어링으로 데이터 추출 정밀도 확보",
+                    ]
+                  },
+                  {
+                    title: "System Architecture & Optimization",
+                    items: [
+                      "MySQL 실행 계획 분석 및 인덱스 최적화로 입시 시즌 집중 트래픽 환경에서 평균 응답 시간 2초 이내 안정화",
+                      "Laravel 기반 엔터프라이즈 아키텍처 고도화",
+                    ]
+                  }
                 ],
-                stack: ["React", "TypeScript", "Redux"]
+                stack: ["PHP", "Laravel", "CodeIgniter", "MySQL", "Ollama", "AI Agents"]
               },
               {
                 period: "2021.07 - 2024.06",
-                role: "PHP 개발자",
+                role: "PHP 풀스택 개발자",
                 company: "(주)이즈소프트 - 대학플랫폼사업부",
-                desc: [
-                  "다양한 기업의 반응형 웹사이트 10여 개 제작 및 유지보수",
-                  "웹 접근성(Web Accessibility) 지침 준수 마크업 진행",
-                  "JQuery를 활용한 동적 UI 인터랙션 구현"
+                subRole: "주요 역할: 전형 시스템 풀스택 개발 및 운영 (7종 핵심 모듈 설계·개발, 인프라 비용 최적화)",
+                sections: [
+                  {
+                    title: "입시/채용 전형 통합 관리 솔루션 개발",
+                    items: [
+                      "서류·면접 평가 & 실기 채점 시스템 (CI / Django): 실시간 데이터 검증 로직으로 채점 오류 0% 달성, 반응형 웹으로 Tablet/PC 환경 지원",
+                      "실기 예약 시스템 리뉴얼 (Laravel / MySQL): 동시 접속자 1,000명 이상 처리를 위한 MySQL Lock 및 트랜잭션 제어 최적화로 무중단 예약 완료 환경 구축",
+                      "합격 예측 & 출결 관리 시스템 (CI / Flutter): 3개년 입시 데이터 분석으로 분석 공수 50% 단축, QR 기반 출결 앱으로 수험생 데이터 확인 시간 30초 미만 단축",
+                    ]
+                  },
+                  {
+                    title: "인프라 및 업무 환경 개선",
+                    items: [
+                      "EC2 인스턴스 최적화 및 Reverse Proxy 도입으로 월 인프라 비용 약 15% 절감",
+                      "사내 보안 프로세스 수립을 통해 민감한 입시 데이터 보안 가이드라인 구축",
+                    ]
+                  }
                 ],
-                stack: ["HTML/CSS", "jQuery", "Gulp"]
+                stack: ["PHP", "CodeIgniter", "Laravel", "Django", "MySQL", "Flutter", "AWS", "Nginx"]
               }
             ].map((item, idx) => (
               <div key={idx} className="relative pl-8 md:pl-12 group">
                 <div className={`absolute -left-[9px] top-0 w-5 h-5 rounded-full border-4 border-white transition-colors duration-300 ${idx === 0 ? 'bg-indigo-600 group-hover:bg-indigo-700' : 'bg-slate-400 group-hover:bg-indigo-400'}`}></div>
-                
+
                 <div className="md:flex md:justify-between mb-2">
                   <h3 className="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">{item.role}</h3>
                   <span className="text-sm font-mono text-slate-500 mt-1 md:mt-0 block">{item.period}</span>
                 </div>
-                <div className="text-indigo-600 font-medium mb-4">{item.company}</div>
-                
-                <ul className="list-disc list-outside ml-4 space-y-2 text-slate-600 text-sm mb-4">
-                  {item.desc.map((d, i) => <li key={i}>{d}</li>)}
-                </ul>
+                <div className="text-indigo-600 font-medium mb-2">{item.company}</div>
+
+                {item.subRole && (
+                  <p className="text-xs text-slate-500 mb-4 italic">{item.subRole}</p>
+                )}
+
+                {item.sections ? (
+                  <div className="space-y-3 mb-4">
+                    {item.sections.map((section, si) => (
+                      <div key={si}>
+                        <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">{section.title}</p>
+                        <ul className="list-disc list-outside ml-4 space-y-1.5 text-slate-600 text-sm">
+                          {section.items.map((d, i) => <li key={i}>{d}</li>)}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <ul className="list-disc list-outside ml-4 space-y-2 text-slate-600 text-sm mb-4">
+                    {item.desc.map((d, i) => <li key={i}>{d}</li>)}
+                  </ul>
+                )}
 
                 <div className="flex flex-wrap gap-2">
                   {item.stack.map((s, i) => (
