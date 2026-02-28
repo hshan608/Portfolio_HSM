@@ -228,7 +228,7 @@ const Portfolio = () => {
 
               <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-6 flex items-center">
-                <span className="text-indigo-600 mr-2">01.</span> About Me
+                <span className="text-indigo-600 mr-2">01.</span> 나를 소개합니다
               </h2>
               <p className="text-lg text-slate-600 mb-6 leading-relaxed">
                 비즈니스 로직 최적화와 AI 도입으로 운영 효율을 극대화하는 <strong>5년 차 풀스택 개발자</strong>입니다.
