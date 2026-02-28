@@ -192,7 +192,7 @@ const Portfolio = () => {
               </div>
 
               <h2 className="text-3xl font-bold text-slate-900 mb-6 flex items-center">
-                <span className="text-indigo-600 mr-2">01.</span> About Me
+                <span className="text-indigo-600 mr-2">01.</span> 나를 소개합니다
               </h2>
               <p className="text-lg text-slate-600 mb-6 leading-relaxed">
                 안녕하세요! 웹 기술로 세상에 가치를 더하고 싶은 <strong>3년차 프론트엔드 개발자</strong>입니다. 
