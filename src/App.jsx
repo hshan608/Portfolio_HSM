@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   Menu, X, Github, Linkedin, Instagram, Mail,
-  ExternalLink, FileText, ArrowRight,
+  ArrowRight,
   Code2, Server, Database, Globe, Terminal, Layout, Box, Smartphone, Layers, Bot
 } from 'lucide-react';
 import profileImage from './assets/my_photo.jpg';
@@ -181,7 +181,7 @@ const Portfolio = () => {
           
           <h3 className="text-2xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
             실패를 두려워 하지 않고 시도하는<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">웹 개발자</span> 한성민입니다.
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">개발자</span> 한성민입니다.
           </h3>
           
           <p className="mt-4 max-w-4xl mx-auto text-xl text-slate-500 mb-10 leading-relaxed">
@@ -228,7 +228,7 @@ const Portfolio = () => {
 
               <div>
               <h2 className="text-3xl font-bold text-slate-900 mb-6 flex items-center">
-                <span className="text-indigo-600 mr-2">01.</span> 나를 소개합니다
+                <span className="text-indigo-600 mr-2">01.</span> About Me
               </h2>
               <p className="text-lg text-slate-600 mb-6 leading-relaxed">
                 비즈니스 로직 최적화와 AI 도입으로 운영 효율을 극대화하는 <strong>5년 차 풀스택 개발자</strong>입니다.
@@ -461,20 +461,21 @@ const Portfolio = () => {
                 title: "HealingHi",
                 desc: "Flutter를 이용한 명언 앱입니다. 매일 새로운 명언과 함께 힐링을 선사합니다. 기획서를 기반으로 바이브 코딩으로 진행한 프로젝트입니다.",
                 tags: ["Flutter", "SupaBase", "AI"],
-                icon: <Layout className="w-10 h-10 text-slate-400" />
+                icon: <Layout className="w-10 h-10 text-slate-400" />,
+                github: "https://github.com/hshan608/HealingHi_Flutter"
               },
-              {
-                title: "이커머스 대시보드",
-                desc: "판매자용 관리자 페이지입니다. Chart.js를 이용한 데이터 시각화와 드래그 앤 드롭을 이용한 상품 관리 기능을 구현했습니다.",
-                tags: ["Next.js", "Tailwind", "Chart.js"],
-                icon: <Box className="w-10 h-10 text-slate-400" />
-              },
-              {
-                title: "실시간 채팅 앱",
-                desc: "Socket.io를 이용한 실시간 채팅 서비스입니다. 방 만들기, 유저 초대, 이미지 전송 기능을 지원합니다.",
-                tags: ["Node.js", "Socket.io", "MongoDB"],
-                icon: <Globe className="w-10 h-10 text-slate-400" />
-              }
+              // {
+              //   title: "이커머스 대시보드",
+              //   desc: "판매자용 관리자 페이지입니다. Chart.js를 이용한 데이터 시각화와 드래그 앤 드롭을 이용한 상품 관리 기능을 구현했습니다.",
+              //   tags: ["Next.js", "Tailwind", "Chart.js"],
+              //   icon: <Box className="w-10 h-10 text-slate-400" />
+              // },
+              // {
+              //   title: "실시간 채팅 앱",
+              //   desc: "Socket.io를 이용한 실시간 채팅 서비스입니다. 방 만들기, 유저 초대, 이미지 전송 기능을 지원합니다.",
+              //   tags: ["Node.js", "Socket.io", "MongoDB"],
+              //   icon: <Globe className="w-10 h-10 text-slate-400" />
+              // }
             ].map((project, idx) => (
               <div key={idx} className="group bg-white rounded-xl overflow-hidden border border-slate-200 hover:border-indigo-600 transition-all hover:-translate-y-2 shadow-sm hover:shadow-xl cursor-pointer">
                 <div className="h-48 bg-slate-50 flex items-center justify-center border-b border-slate-100 group-hover:bg-indigo-50/30 transition-colors">
@@ -484,8 +485,13 @@ const Portfolio = () => {
                   <div className="flex justify-between items-start mb-4">
                     <h3 className="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">{project.title}</h3>
                     <div className="flex space-x-3 text-slate-400">
-                      <Github className="w-5 h-5 hover:text-indigo-600 transition-colors" />
-                      <ExternalLink className="w-5 h-5 hover:text-indigo-600 transition-colors" />
+                      {project.github ? (
+                        <a href={project.github} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
+                          <Github className="w-5 h-5 hover:text-indigo-600 transition-colors" />
+                        </a>
+                      ) : (
+                        <Github className="w-5 h-5" />
+                      )}
                     </div>
                   </div>
                   <p className="text-slate-600 text-sm mb-4 line-clamp-3">
@@ -504,7 +510,7 @@ const Portfolio = () => {
           </div>
 
           <div className="mt-12 text-center">
-            <a href="#" className="inline-flex items-center text-indigo-600 hover:text-indigo-700 font-medium transition-colors">
+            <a href="https://github.com/hshan608" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-indigo-600 hover:text-indigo-700 font-medium transition-colors">
               깃허브에서 더 많은 프로젝트 보기 <ArrowRight className="ml-2 w-4 h-4" />
             </a>
           </div>
@@ -523,21 +529,21 @@ const Portfolio = () => {
             혹은 단순한 커피챗도 언제나 환영합니다.
           </p>
 
-          <a href="mailto:email@example.com" className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 transform hover:scale-105">
+          <a href="mailto:hshann12345@gmail.com" className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 transform hover:scale-105">
             <Mail className="mr-2 w-5 h-5" /> 메일 보내기
           </a>
 
           <div className="mt-20 flex flex-col items-center">
             <div className="flex space-x-8 mb-8">
-              <a href="#" className="text-slate-400 hover:text-indigo-600 transition-colors transform hover:scale-110">
+              <a href="https://github.com/hshan608" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-indigo-600 transition-colors transform hover:scale-110">
                 <Github className="w-6 h-6" />
               </a>
-              <a href="#" className="text-slate-400 hover:text-indigo-600 transition-colors transform hover:scale-110">
+              {/* <a href="#" className="text-slate-400 hover:text-indigo-600 transition-colors transform hover:scale-110">
                 <Linkedin className="w-6 h-6" />
               </a>
               <a href="#" className="text-slate-400 hover:text-indigo-600 transition-colors transform hover:scale-110">
                 <Instagram className="w-6 h-6" />
-              </a>
+              </a> */}
             </div>
             <p className="text-sm text-slate-500">
               © 2024 Developer Portfolio. Built with React & Tailwind.
