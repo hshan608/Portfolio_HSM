@@ -292,8 +292,7 @@ const Portfolio = () => {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <SkillBadge icon={Bot} name="Ollama (Local LLM)" colorClass="bg-purple-500" level="Top" />
                         <SkillBadge icon={Database} name="RAG" colorClass="bg-teal-600" level="Middle" />
-                        <SkillBadge icon={Layout} name="PaddleOCR" colorClass="bg-green-600" level="Middle" />
-                        <SkillBadge icon={Terminal} name="AI Agents" colorClass="bg-violet-600" level="Top" />
+<SkillBadge icon={Terminal} name="AI Agents" colorClass="bg-violet-600" level="Top" />
                         <SkillBadge icon={Database} name="MySQL" colorClass="bg-blue-600" level="Top" />
                       </div>
                     </div>
