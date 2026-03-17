@@ -465,7 +465,7 @@ const Portfolio = () => {
               },
               {
                 title: "AI Programs",
-                desc: "다양한 AI 기술을 활용한 프로그램 모음입니다. Ollama, RAG, AI Agents 등 AI 관련 프로젝트들을 담고 있습니다.",
+                desc: "다양한 AI 기술을 활용한 프로그램 모음입니다. 업무 편의를 위해 개발한 프로그램을 주로 모아두었습니다.",
                 tags: ["Python", "AI", "Ollama", "RAG"],
                 icon: <Bot className="w-10 h-10 text-slate-400" />,
                 github: "https://github.com/hshan608/AI_Programs"
