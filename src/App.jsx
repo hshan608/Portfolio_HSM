@@ -463,6 +463,13 @@ const Portfolio = () => {
                 icon: <Layout className="w-10 h-10 text-slate-400" />,
                 github: "https://github.com/hshan608/HealingHi_Flutter"
               },
+              {
+                title: "AI Programs",
+                desc: "다양한 AI 기술을 활용한 프로그램 모음입니다. Ollama, RAG, AI Agents 등 AI 관련 프로젝트들을 담고 있습니다.",
+                tags: ["Python", "AI", "Ollama", "RAG"],
+                icon: <Bot className="w-10 h-10 text-slate-400" />,
+                github: "https://github.com/hshan608/AI_Programs"
+              },
               // {
               //   title: "이커머스 대시보드",
               //   desc: "판매자용 관리자 페이지입니다. Chart.js를 이용한 데이터 시각화와 드래그 앤 드롭을 이용한 상품 관리 기능을 구현했습니다.",
